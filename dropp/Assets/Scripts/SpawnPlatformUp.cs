@@ -9,8 +9,10 @@ public class SpawnPlatformUp : MonoBehaviour
 	public GameObject upWallPrefab;
 	private List<GameObject> upWalls;
 	private Vector3 start;
-	private float distance =29.9f;
+	private float distance =44.9f;
 	private int count=1;
+	private float displacement=0f;
+
 	private Quaternion rotation;
 
 
@@ -31,7 +33,7 @@ public class SpawnPlatformUp : MonoBehaviour
 
 		if (player.transform.position.x>=upWalls[upWalls.Count-1].transform.position.x-20f) 
 		{
-			GameObject GO=Instantiate(upWallPrefab,new Vector3(start.x+count*distance,start.y,start.z),rotation);
+			GameObject GO=Instantiate(upWallPrefab,new Vector3(start.x+count*distance+Random.Range(0f,displacement),start.y,start.z),rotation);
 			count+=1;
 			upWalls.Add (GO);
 		}

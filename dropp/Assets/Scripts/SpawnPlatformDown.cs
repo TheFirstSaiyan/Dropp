@@ -11,6 +11,7 @@ public class SpawnPlatformDown : MonoBehaviour
 	private List<GameObject> bottomWalls;
 	private Vector3 start;
 	private int count = 1;
+	private float displacement=0f;
 	private float distance =29.9f;
 	private Quaternion rotation;
 	// Use this for initialization
@@ -28,7 +29,7 @@ public class SpawnPlatformDown : MonoBehaviour
 
 		if (player.transform.position.x>=bottomWalls[bottomWalls.Count-1].transform.position.x-20f) 
 		{
-			GameObject GO=Instantiate(bottomWallPrefab,new Vector3(start.x+count*distance,start.y,start.z),rotation);
+			GameObject GO=Instantiate(bottomWallPrefab,new Vector3(start.x+count*distance + Random.Range(0f,displacement),start.y,start.z),rotation);
 			count += 1;
 			bottomWalls.Add (GO);
 

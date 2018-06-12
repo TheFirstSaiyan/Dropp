@@ -6,7 +6,7 @@ using UnityEditor;
 public class PlayerController : MonoBehaviour {
 
 
-            public Rigidbody rb;
+           // public Rigidbody rb;
             private Vector2 startPos;
             private Vector2 endPos;
             private float force=150;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 
 
 	}
-	private void ThrowBall()
+	/*private void ThrowBall()
             {
                 Vector2 direction = endPos - startPos;
         //if (flag == 0)
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour {
        // else
            // force = maxDragDistance;
                 Debug.Log(force);
-                rb.AddForce(direction/direction.magnitude * force * Time.deltaTime, ForceMode.Impulse);
+              //  rb.AddForce(direction/direction.magnitude * force * Time.deltaTime, ForceMode.Impulse);
             }
     private void OnCollisionEnter(Collision collision)
     {
@@ -68,6 +68,6 @@ public class PlayerController : MonoBehaviour {
         }
 
 
-        }
+        }*/
 
     }
