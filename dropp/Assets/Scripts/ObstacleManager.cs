@@ -17,6 +17,8 @@ public class ObstacleManager : MonoBehaviour {
 	public static float totalTime =0;
 	private int flag=0;
 	private float phaseTime;
+	public GameObject animImage;
+
 
 	// Use this for initialization
 	void Start () 
@@ -24,7 +26,7 @@ public class ObstacleManager : MonoBehaviour {
 		totalTime = 0f;
 		blocks = new List<GameObject> ();
 		blockLocations = new List<Vector3> ();
-
+		animImage.SetActive (false);
 	}
 	
 	// Update is called once per frame

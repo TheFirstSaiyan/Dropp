@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour {
 			private float score = 0;
 			private int highScore;
 			private int scoreMultiplier=10;
+			public Animator animator;
+			public GameObject animImage;
+
 	 
     
 	void Start()
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 		gameOverScreen.SetActive (false);
 		timePassed = 0f;
 		highScore = PlayerPrefs.GetInt ("highscore", 0);
+
 	}
 	void FixedUpdate()
 	{
@@ -87,6 +91,9 @@ public class PlayerController : MonoBehaviour {
 
 	private void EndGame()
 	{
+		animImage.SetActive (true);
+		StartCoroutine (waitTime ());
+		animator.SetTrigger ("gameOver");
 		if ((int)score >= highScore) {
 			PlayerPrefs.SetInt ("highscore", (int)score);
 			endScreenBestText.text = "Best : " + (int)score;
@@ -107,5 +114,12 @@ public class PlayerController : MonoBehaviour {
 
 
 
+	}
+
+	IEnumerator waitTime()
+	{
+
+		yield return new WaitForSeconds(0.4f);
+		animImage.SetActive (false);
 	}
     }
