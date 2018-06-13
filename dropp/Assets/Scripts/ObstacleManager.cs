@@ -42,7 +42,6 @@ public class ObstacleManager : MonoBehaviour {
 		{
 		
 			blockPhase = !blockPhase;
-			//SwordPlay.swordPhase = true;
 			totalTime =0;
 			flag = 0;
 		
@@ -55,8 +54,6 @@ public class ObstacleManager : MonoBehaviour {
 					blockLocations.Add (GO.transform.position);
 				} else {
 					float Y = Mathf.Clamp (player.position.y, 3.2f, 12.8f);
-					//GameObject GO = Instantiate (blockPrefab, new Vector3 (player.position.x + Random.Range(3,XGAP),Y, player.position.z), Quaternion.identity);
-
 					GameObject GO = Instantiate (blockPrefab, new Vector3 (player.position.x + Random.Range (3, XGAP), Random.Range (player.position.y, 8f), player.position.z), Quaternion.identity);
 					blocks.Add (GO);
 					blockLocations.Add (GO.transform.position);
@@ -68,7 +65,8 @@ public class ObstacleManager : MonoBehaviour {
 
 				for (int i = blocks.Count - 1; i >= 0; i--) {
 			
-					if (player.position.x - blockLocations [i].x > 8f) {
+					if (player.position.x - blockLocations [i].x > 8f) 
+					{
 
 						Destroy (blocks [i]);
 						blocks.RemoveAt (i);

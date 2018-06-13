@@ -11,37 +11,19 @@ public class PlayerController : MonoBehaviour {
             private Vector2 endPos;
             private float force=150;
 	        private float speed =6f;
-
+	        public GameObject cam;
+	        public GameObject gameOverScreen;
             private float maxDragDistance = 65f;
-	        void Start ()
-            {
-		
-	        }
+	public GameObject platformUp;
+	public GameObject platformDown;
+	public GameObject ObsManager;
 
-    /*void Update ()
-     {
-
-
-         if (Input.GetMouseButtonDown(0))
-         {
-             startPos = Input.mousePosition;
-
-         }
-
-         if(Input.GetMouseButtonUp(0) && Input.mousePosition.y> startPos.y + 5)
-         {
-
-                 endPos = Input.mousePosition;
-    //  if (Vector3.Distance(startPos, endPos) <= maxDragDistance)
-   //        ThrowBall(0);
-   //   else {
-   //          ThrowBall(1);
-   //   }
-    ThrowBall();
-         }
-     }*/
-
-	void Update()
+    
+	void Start()
+	{
+		gameOverScreen.SetActive (false);
+	}
+	void FixedUpdate()
 	{
 		if (Input.GetMouseButtonDown (0)) {
 			Physics.gravity = new Vector3 (0, -1 * Physics.gravity.y, 0);
@@ -50,24 +32,50 @@ public class PlayerController : MonoBehaviour {
 
 
 	}
-	/*private void ThrowBall()
-            {
-                Vector2 direction = endPos - startPos;
-        //if (flag == 0)
-          //  force = Vector3.Distance(startPos, endPos);
-       // else
-           // force = maxDragDistance;
-                Debug.Log(force);
-              //  rb.AddForce(direction/direction.magnitude * force * Time.deltaTime, ForceMode.Impulse);
-            }
+	/*private void Update()
+	{
+
+		if (Input.GetMouseButton (0)) {
+			float z = transform.position.z;
+			transform.position=Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			transform.position = new Vector3 (transform.position.x, transform.position.y, z);
+		}
+
+	}*/
+
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.gameObject.CompareTag("safe"))
+		if (collision.collider.gameObject.CompareTag("rockObstacle"))
         {
-			GetComponent<SphereCollider> ().material.bounciness = 0;
+			//cam.GetComponent<Animation>().Play("gameOverAnimation");
+			EndGame();
+		}
+
+
         }
+	private void OnTriggerEnter(Collider collider)
+	{
+		if (collider.gameObject.CompareTag("sword"))
+		{
+			EndGame ();
+			//cam.GetComponent<Animation>().Play("gameOverAnimation");
+		}
+		}
 
 
-        }*/
 
+	private void EndGame()
+	{
+		gameOverScreen.SetActive(true);    
+		cam.GetComponent<FollowPlayer> ().enabled = false;
+		platformUp.GetComponent<SpawnPlatformUp> ().enabled = false;
+		platformDown.GetComponent<SpawnPlatformDown> ().enabled = false;
+		ObsManager.GetComponent<SwordPlay> ().enabled = false;
+		ObsManager.GetComponent<ObstacleManager> ().enabled = false;
+		GetComponent<PlayerController> ().enabled = false;
+
+
+
+	}
     }
