@@ -11,17 +11,17 @@ public class ObstacleManager : MonoBehaviour {
 	public Transform player;
 	private List<GameObject> blocks;
 	private List<Vector3> blockLocations;
-	private const float XGAP = 6f;
+	private const float XGAP = 10f;
 	private const float YGAP= 1f;
 	private float timePassed=0f;
-	private float totalTime =0;
+	public static float totalTime =0;
 	private int flag=0;
 	private float phaseTime;
 
 	// Use this for initialization
 	void Start () 
 	{
-
+		totalTime = 0f;
 		blocks = new List<GameObject> ();
 		blockLocations = new List<Vector3> ();
 
@@ -54,7 +54,7 @@ public class ObstacleManager : MonoBehaviour {
 					blockLocations.Add (GO.transform.position);
 				} else {
 					float Y = Mathf.Clamp (player.position.y, 3.2f, 12.8f);
-					GameObject GO = Instantiate (blockPrefab, new Vector3 (player.position.x + Random.Range (3, XGAP), Random.Range (player.position.y, 8f), player.position.z), Quaternion.identity);
+					GameObject GO = Instantiate (blockPrefab, new Vector3 (player.position.x + Random.Range (6f, XGAP), Random.Range (player.position.y, 8f), player.position.z), Quaternion.identity);
 					blocks.Add (GO);
 					blockLocations.Add (GO.transform.position);
 
